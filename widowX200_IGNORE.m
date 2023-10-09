@@ -36,11 +36,14 @@
     %% Peter Corke Widow250x Original  = Rz(q1)Tz(L1)  Ry(q2) Tz(L2)Tx(L3)               Ry(q3)Tx(L4)Rx(q4)Tx(L5)Ry(q5)Tx(L6)Rx(q6)Tx(L7)
     %% Peter Corke Widow250x w/ Offset = Rz(q1)Tz(L1)  Ry(q2) Ry(beta)Tz(L8)Ry(-beta)    Ry(q3)Tx(L4)Rx(q4)Tx(L5)Ry(q5)Tx(L6)Rx(q6)Tx(L7)
 
-    %% My Original Widow200x  =  Rz(q1)Tz(L1)  Ry(q2)Tz(L2)Tx(L3)                Ry(q3)Tx(L4)Ry(q4)Tx(L5)Rx(q5)Tx(L6)
-    %% My Widow200x w/ offset =  Rz(q1)Tz(L1)  Ry(OffsetAngleA)Tz(L8)Ry(-OffsetAngleA)           Ry(q3)Tx(L4)Ry(q4)Tx(L5)Rx(q5)Tx(L6)
+    %%    Original Widow200x  =  Rz(q1)Tz(L1)  Ry(q2)Tz(L2)Tx(L3)                Ry(q3)Tx(L4)Ry(q4)Tx(L5)Rx(q5)Tx(L6)
+    %% My Widow200x w/ offset =  Rz(q1)Tz(L1)  Ry(q2)Ry(OffsetAngleA)Tz(L8)Ry(-OffsetAngleA)           Ry(q3)Tx(L4)Ry(q4)Tx(L5)Rx(q5)Tx(L6)
 
 
-   Rz(q1)Tz(L1)Ry(OffsetAngleA)Tz(L8)Ry(-OffsetAngleA)Ry(q3)Tx(L4)Ry(q4)Tx(L5)Rx(q5)Tx(L6)
+   %Rz(q1)Tz(L1)Ry(q2)Ry(OffsetAngleA)Tz(L8)Ry(-OffsetAngleA)Ry(q3)Tx(L4)Ry(q4)Tx(L5)Rx(q5)Tx(L6)
+
+   %PETER CORKES = DH(q1, L1, 0, -90) DH(q2+90+beta, 0, -L8, 0) DH(q3-beta, 0, 0, 90) DH(q4, L4+L5, 0, -90) DH(q5+180, 0, 0, 90) DH(q6+90, L6+L7, 0, -90) Rz(-90)
+   DH(q1,L1,0,-90) DH(q2+90+beta,0,-L8,0)
 
 
 

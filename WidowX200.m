@@ -5,11 +5,31 @@ classdef WidowX200 < RobotBaseClass
         plyFileNameStem = 'WidowX200';
     end
 
-    % Constructor
-    %methods(Access = public)   
-    methods
-        function self = WidowX200(baseTr,useTool,toolFilename)
-            if nargin <2
+    %% Constructor
+                     %methods(Access = public)   
+    methods    
+                    % function self = WidowX200(baseTr,useTool,toolFilename)
+                    %  if nargin < 2
+                    %     if nargin == 0
+                    %          baseTr = transl(0,0,0);  
+                    %     end
+                    % else 
+                    %         self.useTool = useTool;
+                    %         toolTrData = load([toolFilename,'.mat']);
+                    %         self.toolTr = toolTrData.tool;
+                    %         self.toolFilename = [toolFilename,'.ply'];
+                    %  end   
+                    % 
+                    %     self.CreateModel();
+                    %     self.model.base = self.model.base.T * baseTr;
+                    %     self.model.tool = self.toolTr;
+                    %     self.PlotAndColourRobot();  
+                    %    % axis equal
+                    %     drawnow
+                    % end
+          function self = WidowX200(baseTr,useTool,toolFilename)
+         if nargin < 2
+            if nargin == 0
                  baseTr = transl(0,0,0);  
             end
         else 
@@ -17,18 +37,20 @@ classdef WidowX200 < RobotBaseClass
                 toolTrData = load([toolFilename,'.mat']);
                 self.toolTr = toolTrData.tool;
                 self.toolFilename = [toolFilename,'.ply'];
+         end   
 
-        end    
-            self.model.base = self.model.base.T * baseTr;
             self.CreateModel();
-            self.PlotAndColourRobot();   
-           % drawnow
+            self.model.base = self.model.base.T * baseTr;
+            self.model.tool = self.toolTr;
+            self.PlotAndColourRobot();  
+           % axis equal
+            drawnow
         end
 
-    %CreateModel
+    %%CreateModel
     %% This is most likely not 100% accurate, I am just trying to model it to see
         function CreateModel(self)
-               %%TOOK AGES but gave me an error if the first link was
+               %%gave me an error if the first link was
                %%link(0) instead of link(1)
             %
            % link(0) = Link('d',0.11325,'a',0,'alpha',pi/2,'offset',0,'qlim',[deg2rad(-180),deg2rad(180)]);
@@ -37,7 +59,7 @@ classdef WidowX200 < RobotBaseClass
             link(3) = Link('d',0,'a',0.200,'alpha',0,'offset',0,'qlim',deg2rad([-108 93]));
             link(4) = Link('d',0,'a',0.065,'alpha',0,'offset',0,'qlim',deg2rad([-100 123]));
             link(5) = Link('d',0.10916,'a',0,'alpha',pi/2,'offset',0,'qlim',deg2rad([-180 180]));
-
+            %link(6) = Link('d',0,'a',0,'alpha',0,'offset',0,'qlim',deg2rad([-180 180]));
             self.model = SerialLink(link,'name',self.name);
         end
     end

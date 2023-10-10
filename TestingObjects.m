@@ -6,6 +6,6 @@
 %WidowX200Link6.ply good
 
 
-PlaceObject('WidowX200Link7.ply')
+PlaceObject('WidowX200Link10.ply')
 axis equal
 camlight

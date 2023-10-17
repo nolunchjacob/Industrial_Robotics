@@ -20,12 +20,12 @@ baseTr = transl([-0.5, 0, 0]) * trotx(0) * troty(0) * trotz(0);
 
 
     % % Call brick_pos function with each position vector to place bricks
-    coin_pos(pos_coin1);
-    coin_pos(pos_coin2);
-    coin_pos(pos_coin3);
-    coin_pos(pos_coin4);
-    coin_pos(pos_coin5);
-    coin_pos(pos_coin6);
+    fivecentcoin_pos(pos_coin1);
+    fivecentcoin_pos(pos_coin2);
+    fivecentcoin_pos(pos_coin3);
+    fivecentcoin_pos(pos_coin4);
+    fivecentcoin_pos(pos_coin5);
+    fivecentcoin_pos(pos_coin6);
 
 % keyboard;
 

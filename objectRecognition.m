@@ -2,6 +2,8 @@ clear all;
 clc
 
 
+%% reference: https://www.youtube.com/watch?v=lQTCq87DSrc&t=28s
+
 hold on;
 % visualize_and_analyze_robot_test;
 % axis([-2, 3, -2, 2, 0, 2]); % Set axis limits to match your robot's workspace
@@ -9,6 +11,7 @@ hold on;
 baseTr = transl([-0.5, 0, 0]) * trotx(0) * troty(0) * trotz(0);
     robot = DobotMagician(baseTr);
     q = robot.model.getpos();
+  %  view([0,0.5,0.4])
     robot.model.fkine(q);
 % Define position vectors for q1 to q9 (adjust the values as needed)
     pos_coin1 = [-0.3, -0.2, 0]; %% five cent coin
@@ -34,7 +37,21 @@ baseTr = transl([-0.5, 0, 0]) * trotx(0) * troty(0) * trotz(0);
     twoDollarCoin_pos(pos_coin5);
     oneDollarCoin_pos(pos_coin6);
 
-% keyboard;
+% % keyboard;
+% P = [-0.2, 0, 0.8]; 
+% 
+% cam = CentralCamera('focal', 0.08, 'pixel', 10e-5, ...
+% 'resolution', [1024 1024], 'centre', [512 512],'name', 'camera');
+% 
+% % frame rate
+% fps = 25;
+% 
+% cam.plot(P);
+
+
+%camera_pos = 90.1972,35.5351
+%projection = orthagraphic
+
 
 % Define a trajectory of joint configurations
 q_startpos = robot.model.ikcon(transl(-0.2, 0, 0.1));
@@ -47,7 +64,37 @@ q6 = robot.model.ikcon(transl(pos_coin6) * trotx(pi));
 
 
 %drop off positions
-q_drop = robot.model.ikcon(transl(-0.3, 0, 0.1) * trotx(pi));
+q_drop = robot.model.ikcon(transl(-0.2, 0, 0.1) * trotx(pi));
+view([90 50]) %% http://www.ece.northwestern.edu/local-apps/matlabhelp/techdoc/ref/view.html 
+% ^^^^setting a custom view of the workspace 
+
+
+%% https://undocumentedmatlab.com/articles/screencapture-utility
+
+%imageData = screencapture();%% taking a screenshot of the figure/workspace with the custom position/view of the camera
+imageData = screencapture(gcf,[20,30,40,40]);
+imwrite(imageData, 'calibrationImage.png') %%saving the screenshot 
+figure
+rgb = imread("calibrationImage.png");
+%[J, rect] = imcrop();
+targetSize = [400 600];
+r = centerCropWindow2d(size(rgb), targetSize);
+J = imcrop(rgb,r);
+imshow(J)
+%rgbcropped = imcrop(rgb, [])
+% 
+% rgbcropped = imshow(rgb, [75 68 130 112]); 
+d = drawline;
+pos = d.Position;
+diffPos = diff(pos);
+diameter = hypot(diffPos(1), diffPos(2));
+
+gray_image = im2gray(J);
+figure 
+imshow(gray_image);
+
+[centers, radii] = imfindcircles(J,[2 6], "ObjectPolarity", "dark", "Sensitivity", 0.92)
+h = viscircles(centers,radii); 
 
 
 trajectory1 = jtraj(q_startpos, q1, 50);
@@ -94,96 +141,3 @@ for i = 1:size(trajectory2, 1)
     drawnow;
     pause(0.1);
 end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-for i = 1:size(trajdrop2, 1)
-    robot.model.animate(trajdrop2(i, :));
-    drawnow;
-    pause(0.1);
-    
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-
-
-for i = 1:size(trajectory3, 1)
-    robot.model.animate(trajectory3(i, :));
-    drawnow;
-    pause(0.1);
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-for i = 1:size(trajdrop3, 1)
-    robot.model.animate(trajdrop3(i, :));
-    drawnow;
-    pause(0.1);
-    
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-
-
-
-for i = 1:size(trajectory4, 1)
-    robot.model.animate(trajectory4(i, :));
-    drawnow;
-    pause(0.1);
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-
-for i = 1:size(trajdrop4, 1)
-    robot.model.animate(trajdrop4(i, :));
-    drawnow;
-    pause(0.1);
-    
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-
-
-
-for i = 1:size(trajectory5, 1)
-    robot.model.animate(trajectory5(i, :));
-    drawnow;
-    pause(0.1);
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-for i = 1:size(trajdrop5, 1)
-    robot.model.animate(trajdrop5(i, :));
-    drawnow;
-    pause(0.1);
-    
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-
-
-
-
-for i = 1:size(trajectory6, 1)
-    robot.model.animate(trajectory6(i, :));
-    drawnow;
-    pause(0.1);
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-
-for i = 1:size(trajdrop6, 1)
-    robot.model.animate(trajdrop6(i, :));
-    drawnow;
-    pause(0.1);
-    
-end
-disp(['Forward Kinematics:'])
-disp(robot.model.fkine(robot.model.getpos()));
-% keyboard;

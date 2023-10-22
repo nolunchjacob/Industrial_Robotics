@@ -2,7 +2,7 @@
 %% https://github.com/gapaul/dobot_magician_driver 
 %% I found this on google looking up Dobot Magician ROS Matlab, looks super useful pls look at it! :)
 %% object detection 
-%% https://au.mathworks.com/help/vision/ug/automate-ground-truth-labeling-for-object-detection.html
+%%      
 clear all;
 clc;
 close all; 

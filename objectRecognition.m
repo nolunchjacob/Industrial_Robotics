@@ -77,23 +77,25 @@ imwrite(imageData, 'calibrationImage.png') %%saving the screenshot
 figure
 rgb = imread("calibrationImage.png");
 %[J, rect] = imcrop();
-targetSize = [400 600];
+targetSize = [420 600];
 r = centerCropWindow2d(size(rgb), targetSize);
-J = imcrop(rgb,r);
-imshow(J)
+J = imcrop(rgb,r); %% crops image to remove the title of window etc 
+imshow(J) 
 %rgbcropped = imcrop(rgb, [])
 % 
 % rgbcropped = imshow(rgb, [75 68 130 112]); 
-d = drawline;
-pos = d.Position;
-diffPos = diff(pos);
-diameter = hypot(diffPos(1), diffPos(2));
 
-gray_image = im2gray(J);
+% d = drawline; %%% code commented out this line and below lets you draw a
+% line to see how long the coins are, good for calibration
+% pos = d.Position;
+% diffPos = diff(pos);
+% diameter = hypot(diffPos(1), diffPos(2));
+
+gray_image = im2gray(J); %%change the cropped image from rgb to grayscale
 figure 
 imshow(gray_image);
 
-[centers, radii] = imfindcircles(J,[2 6], "ObjectPolarity", "dark", "Sensitivity", 0.92)
+[centers, radii] = imfindcircles(J,[2 6], "ObjectPolarity", "dark", "Sensitivity", 0.89)
 h = viscircles(centers,radii); 
 
 

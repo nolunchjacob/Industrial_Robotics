@@ -67,7 +67,7 @@ function visualize_and_analyze_robot_test()
 
     %% Person
             % Load the desk model data
-    [f, v, data] = plyread('personMaleCasual.ply', 'tri');
+    [f, v, data] = plyread('labsupervisor.ply', 'tri');
 
     % Scale the colors to be 0-to-1 (they are originally 0-to-255)
     vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;

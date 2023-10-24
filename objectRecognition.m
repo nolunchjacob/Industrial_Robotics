@@ -95,7 +95,7 @@ gray_image = im2gray(J); %%change the cropped image from rgb to grayscale
 figure 
 imshow(gray_image);
 
-[centers, radii] = imfindcircles(J,[2 6], "ObjectPolarity", "dark", "Sensitivity", 0.89)
+[centers, radii] = imfindcircles(J,[2 6], "ObjectPolarity", "dark", "Sensitivity", 0.89, "EdgeThreshold",0.1)
 h = viscircles(centers,radii); 
 
 

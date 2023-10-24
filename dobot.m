@@ -56,7 +56,7 @@ q_drop = robot.model.ikcon(transl(-0.3, 0, 0.65) * trotx(pi));
 
 % robot moves from starting pos->1st coin-> (drop off->next coin (repeat))
 trajectory1 = jtraj(q_startpos, q1, 50);
-trajdrop1 = jtraj(q1,q_drop, 50);
+trajdrop1 = jtraj(q1, q_drop, 50);
 
 trajectory2 = jtraj(q_drop, q2, 50); 
 trajdrop2 = jtraj(q2, q_drop, 50);

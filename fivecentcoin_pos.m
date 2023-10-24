@@ -13,7 +13,7 @@ function fivecentcoin_pos(pos_vector)
     hold on;
 
     % Plot the brick at the specified position
-    brickMesh_h = trisurf(f, v_trmatrix(:, 1), v_trmatrix(:, 2), v_trmatrix(:, 3), ...
+    coinMesh_h = trisurf(f, v_trmatrix(:, 1), v_trmatrix(:, 2), v_trmatrix(:, 3), ...
         'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
 
     % Configure the view, axis limits, and other settings as needed

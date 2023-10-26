@@ -118,6 +118,57 @@ function visualize_and_analyze_robot_test()
         'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
 
 
+        %% bookcase
+        % Load the desk model data
+    [f, v, data] = plyread('bookcaseTwoShelves0.5x0.2x0.5m.ply', 'tri');
+
+    % Scale the colors to be 0-to-1 (they are originally 0-to-255)
+    vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
+
+    % Define your transformation matrix for the desk
+    transformationMatrix = transl([-0.3, 1.7, 0]) * trotx(0) * troty(0) * trotz(0);
+
+    % Apply the transformation to the vertex coordinates
+    v_transformed = (transformationMatrix(1:3, 1:3) * v' + transformationMatrix(1:3, 4))';
+
+    % Then plot the trisurf with the transformed vertices for the desk
+    trisurf(f, v_transformed(:, 1), v_transformed(:, 2), v_transformed(:, 3), ...
+        'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
+
+            %% chair
+        % Load the desk model data
+    [f, v, data] = plyread('chair.ply', 'tri');
+
+    % Scale the colors to be 0-to-1 (they are originally 0-to-255)
+    vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
+
+    % Define your transformation matrix for the desk
+    transformationMatrix = transl([2.5, -1.5, 0]) * trotx(pi/2) * troty(-pi/2) * trotz(0);
+
+    % Apply the transformation to the vertex coordinates
+    v_transformed = (transformationMatrix(1:3, 1:3) * v' + transformationMatrix(1:3, 4))';
+
+    % Then plot the trisurf with the transformed vertices for the desk
+    trisurf(f, v_transformed(:, 1), v_transformed(:, 2), v_transformed(:, 3), ...
+        'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
+
+        %% Person
+            % Load the desk model data
+    [f, v, data] = plyread('personMaleCasual.ply', 'tri');
+
+    % Scale the colors to be 0-to-1 (they are originally 0-to-255)
+    vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
+
+    % Define your transformation matrix for the desk
+    transformationMatrix = transl([1, -1.7, 0]) * trotx(0) * troty(0) * trotz((3*pi)/4);
+
+    % Apply the transformation to the vertex coordinates
+    v_transformed = (transformationMatrix(1:3, 1:3) * v' + transformationMatrix(1:3, 4))';
+
+    % Then plot the trisurf with the transformed vertices for the desk
+    trisurf(f, v_transformed(:, 1), v_transformed(:, 2), v_transformed(:, 3), ...
+        'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
+
 
 end
 

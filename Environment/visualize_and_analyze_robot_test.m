@@ -169,7 +169,22 @@ function visualize_and_analyze_robot_test()
     trisurf(f, v_transformed(:, 1), v_transformed(:, 2), v_transformed(:, 3), ...
         'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
 
+            %% Camera
+            % Load the desk model data
+    [f, v, data] = plyread('Camera.ply', 'tri');
 
+    % Scale the colors to be 0-to-1 (they are originally 0-to-255)
+    vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
+
+    % Define your transformation matrix for the desk
+    transformationMatrix = transl([-1.8, 1.8, 2]) * trotx(pi) * troty(0) * trotz(0);
+
+    % Apply the transformation to the vertex coordinates
+    v_transformed = (transformationMatrix(1:3, 1:3) * v' + transformationMatrix(1:3, 4))';
+
+    % Then plot the trisurf with the transformed vertices for the desk
+    trisurf(f, v_transformed(:, 1), v_transformed(:, 2), v_transformed(:, 3), ...
+        'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
 end
 
 

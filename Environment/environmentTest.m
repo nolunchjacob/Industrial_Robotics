@@ -19,8 +19,8 @@ function environmentTest()
     % addMesh(scenario,"Plane",Position=[0 0 0],Size=[4 4],Color=[0.7 0.7 0.7]);
     % show3D(scenario)
 
-    floor_size = 6;
-floor = patch([-floor_size, floor_size, floor_size, -floor_size], -floor_size, -floor_size, floor_size, floor_size], [0.1, 0.1, 0.1, 0.1]);
+  
+floor = patch([-6, 6, 6, -6], -6, -6, 6, 6], [0.1, 0.1, 0.1, 0.1]);
 
 
     

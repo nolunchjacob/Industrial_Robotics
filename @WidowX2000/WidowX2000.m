@@ -34,7 +34,7 @@ classdef WidowX2000 < RobotBaseClass
             %% DH PARAMETERS BELOW ARE INCORRECT, but have gotten rid of the PLY read error which is good ! :)
             
             link(1) = Link('d',0,'a',0.11325,'alpha',pi/2,'offset',0,'qlim',[deg2rad(-180),deg2rad(180)]);
-            link(2) = Link('d',0.11325,'a',0,'alpha',0,'offset',0,'qlim',deg2rad([-180 180]));
+            link(2) = Link('d',0.11325,'a',0,'alpha',pi/2,'offset',0,'qlim',deg2rad([-180 180]));
             link(3) = Link('d',0,'a',0.20616,'alpha',0,'offset',0,'qlim',deg2rad([-108 113]));
             link(4) = Link('d',0,'a',0.200,'alpha',0,'offset',0,'qlim',deg2rad([-108 93]));
             link(5) = Link('d',0,'a',0.065,'alpha',0,'offset',0,'qlim',deg2rad([-100 123]));

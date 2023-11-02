@@ -64,38 +64,6 @@ classdef WidowX200 < RobotBaseClass
         end
     end
 end
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     %% If we want to do control methods 
     % Jm = Inertia of motor
     % Bm = Friction of motor 

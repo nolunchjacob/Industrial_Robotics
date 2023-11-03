@@ -63,14 +63,6 @@ for i = 1:size(robot_to_coin_trajectory1, 1)
 end
 
 
-% Animate the robot's motion to the coin's pickup position
-for i = 1:size(robot_to_coin_trajectory1, 1)
-    robot.model.animate(robot_to_coin_trajectory1(i, :));
-    drawnow;
-    pause(0.1);
-end
-
-
 % Animate the robot's motion with the coin to the drop-off position
 for i = 1:size(coin_to_dropoff_trajectory1, 1)
     % Get the end effector position

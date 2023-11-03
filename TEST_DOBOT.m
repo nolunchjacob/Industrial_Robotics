@@ -6,25 +6,24 @@ axis equal;
 hold on;
 
 
-% visualize_and_analyze_robot_test;
+
 % Initialize the robot and set the base transformation matrix
-baseTr = transl([0, 0, 0.5]) * trotx(0) * troty(0) * trotz(pi/2);
+baseTr = transl([-0.8, 2.15, 1]) * trotx(0) * troty(0) * trotz(pi/2);
 
 robot = DobotMagician(baseTr);
 
-% axis([-1, 1, -1, 1, -0.1, 1]);
-axis equal;
+axis([-2, 1, 1, 3, 0.5, 2]);
 
 q_s = [-90, 55, 60, 65, 0];
 % keyboard;
 % Set the initial positions for the robot and the coin
-q_startpos = robot.model.ikcon(transl(0.3, 0, 0.6), q_s);
+q_startpos = robot.model.ikcon(transl(-0.5, 2.15, 1.1), q_s);
 
 
 
 % pos_coin1 = [-0.35, -0.35, 0.533];
-pos_coin1 = [0, 0.275, 0.5];
-pos_coin2 = [-0.275, 0, 0.5];
+pos_coin1 = [-0.8, 2.425, 1];
+pos_coin2 = [-1.075, 2.15, 1];
 
 % initial joint coordinates q0 used for the minimisation.
 q1 = [0, 75, 70, 35, 0];
@@ -41,11 +40,11 @@ coin_pickup2 = robot.model.ikcon(transl(pos_coin2), q2);
 
 
 % Use inverse kinematics to find the desired joint angles for the coin drop-off
-coin_drop1 = robot.model.ikcon(transl(0.3, 0.2, 0.6), q_s);
+coin_drop1 = robot.model.ikcon(transl(-0.5, 2.15, 1.1), q_s);
 
 
 q_handoff = [90 45 45 0 0];
-coin_drop2 = robot.model.ikcon(transl(-0.292, 0, 0.795), q_handoff);
+coin_drop2 = robot.model.ikcon(transl(-1.092, 2.15, 1.295), q_handoff);
 
 
 % Generate trajectories for robot movement and coin movement

@@ -39,7 +39,7 @@ function environmentTest()
 
     %% emergency stop button 
    plyfilename1 = 'emergencyStopWallMounted.ply';
-   transformationMatrix1 = transl([2, 2, 1]) * trotx(0) * troty(0) * trotz(0);
+   transformationMatrix1 = transl([2, 2.9, 1]) * trotx(0) * troty(0) * trotz(pi);
    modelObject(plyfilename1,transformationMatrix1);
 
 %% table
@@ -52,7 +52,7 @@ function environmentTest()
   
 %% fire extinguisher
     plyfilename3 = 'fireExtinguisher.ply';
-    transformationMatrix3 = transl([2.5, 1.9, 0.5]) * trotx(0) * troty(0) * trotz(pi/2);
+    transformationMatrix3 = transl([2.5, 2.9, 0.5]) * trotx(0) * troty(0) * trotz(pi/2);
     modelObject(plyfilename3,transformationMatrix3);
 
 %% Lab Supervosr

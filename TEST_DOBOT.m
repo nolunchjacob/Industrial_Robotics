@@ -1,4 +1,4 @@
-function dobot_test
+function TEST_DOBOT
 
 clear all;
 clc
@@ -12,7 +12,8 @@ baseTr = transl([0, 0, 0.5]) * trotx(0) * troty(0) * trotz(pi/2);
 
 robot = DobotMagician(baseTr);
 
-axis([-1, 1, -1, 1, -0.1, 1]);
+% axis([-1, 1, -1, 1, -0.1, 1]);
+axis equal;
 
 q_s = [-90, 55, 60, 65, 0];
 % keyboard;

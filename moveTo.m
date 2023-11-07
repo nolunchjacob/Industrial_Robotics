@@ -1,41 +1,25 @@
-function [trajectory, currentStep, ObjectVerts] = moveTo(StartPose, EndPose, Robot, InitialGuess, Object, ObjectVerts)
-    if nargin == 5
-        trfix = inv(Robot.model.fkine(Robot.model.getpos)) * [ObjectVerts, ones(size(ObjectVerts, 1), 1)];
+function moveTo(pos_vector)
+    [f, v, data] = plyread('HalfSizedRedGreenBrick.ply', 'tri');
 
-        ObjectAttached = 1;
-    else
-        ObjectAttached = 0;
-    end
-    
-    qStart = Robot.model.ikcon(StartPose, InitialGuess);
-    qEnd = Robot.model.ikcon(EndPose, InitialGuess);
-    
-    % Determine Steps required based on distance
-    Start = Robot.model.fkineUTS(qStart);
-    End = Robot.model.fkineUTS(qEnd);
-    StartTr = Start(1:3, 4);
-    EndTr = End(1:3, 4);
-    travelDistance = norm(StartTr - EndTr);
-    steps = round(100 * travelDistance + 15);
-    
-    % Generate Trajectory
-    trajectory = jtraj(qStart, qEnd, steps);
-    
-    for i = 1:size(trajectory, 1)
-        Robot.model.animate(trajectory(i, :));
-        
-        if ObjectAttached == 1
-            UpdateObject = Robot.model.fkine(trajectory(i, :)).T * trfix;
-            trvert = UpdateObject(1:3, :)';
-            set(Object, 'Vertices', trvert); % animate trajectory
-        end
-        
-        currentStep = i;
-        drawnow;
-        pause(0.05);
-        
-        if ObjectAttached == 1
-            ObjectVerts = get(Object, 'Vertices');
-        end
-    end
+    % Scale the colors to be 0-to-1 (they are originally 0-to-255)
+    vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
+
+    % Create a 4x4 homogeneous transformation matrix from the provided position vector
+    trmatrix = transl(pos_vector); % You can modify the rotation as needed
+
+    v_trmatrix = (trmatrix(1:3, 1:3) * v' + trmatrix(1:3, 4))';
+
+    % Create a figure for visualization
+    hold on;
+
+    % Plot the brick at the specified position
+    coinMesh_h = trisurf(f, v_trmatrix(:, 1), v_trmatrix(:, 2), v_trmatrix(:, 3), ...
+        'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
+
+    % Configure the view, axis limits, and other settings as needed
+    view(3);
+    grid on;
+
+    % Wait for user input (you can remove this if not needed)
+    % keyboard;
 end
